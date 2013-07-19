@@ -1,0 +1,7 @@
+*~
+*pyc
+/node_modules
+database.sqlite
+_database.sqlite
+config.py
+configs.py
