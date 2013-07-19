@@ -174,8 +174,10 @@ def page_location_list():
 @app.route('/404')
 def error_404(e=None):
 	if e:
-		return render_template('404.html'), 404
-	return render_template('404.html')
+		return 'not found', 404
+		#return render_template('404.html'), 404
+	return 'not found'
+	#return render_template('404.html')
 
 #####@login_manager.unauthorized_handler
 def unauthorized():
