@@ -63,6 +63,12 @@ elif uname in ['isimobile', 'root']:
 def index():
 	return render_template('index.html')
 
+
+@app.route('/purchasing')
+def purchasing():
+	return render_template('linkout.html', linkName='foo')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	error = None
