@@ -7,17 +7,22 @@
 
 // CSS Libraries
 @import (less) "lib/bootstrap.css";
-@import (less) "lib/style.css";
-@import (less) "lib/headers/header1.css";
+/*@import (less) "lib/style.css";//*/
+/*@import (less) "lib/headers/header1.css";//*/
 @import (less) "lib/bootstrap-responsive.css";
-@import (less) "lib/style_responsive.css";
-@import (less) "lib/themes/orange.css";
-@import (less) "lib/themes/headers/header1-orange.css";
+/*@import (less) "lib/style_responsive.css";//*/
+/*@import (less) "lib/themes/orange.css";//*/
+/*@import (less) "lib/themes/headers/header1-orange.css";//*/
 
 // Our styles
 @import "colors.less";
+@import "fonts.less";
+@import "test.less";
 
-body {
-	color: @burntPikachu;
+#logo {
+	img {
+		display: block;
+		margin: auto;
+		padding: 0.5em 0em;
+	}
 }
-

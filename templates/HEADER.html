@@ -1,0 +1,27 @@
+{% block header %}
+<div class="row" id="logo">
+  <div class="span12">
+    <a href="/"><img
+       src="/static/assets/west_ga_resa_400.png"
+       alt="West GA Resa"></a>
+  </div>
+</div>
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <ul class="nav">
+      <li {% if pageName =='IndexPage' %}class="active"{% endif %}><a 
+          href="/">Home</a></li>
+      <li {% if pageName =='NewsPage' %}class="active"{% endif %}><a 
+          href="/">News</a></li>
+      <li {% if pageName =='PurchasingPage' %}class="active"{% endif %}><a 
+          href="/purchasing">Purchasing</a></li>
+      <li {% if pageName =='AboutPage' %}class="active"{% endif %}><a 
+          href="/about">About</a></li>
+      <li {% if pageName =='TempPage' %}class="active"{% endif %}><a 
+          href="/temp">(Unity Design)</a></li>
+    </ul>
+  </div>
+</div>
+ 
+{% endblock header %}

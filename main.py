@@ -63,11 +63,13 @@ elif uname in ['isimobile', 'root']:
 def index():
 	return render_template('index.html')
 
-
 @app.route('/purchasing')
 def purchasing():
-	return render_template('linkout.html', linkName='foo')
+	return render_template('linkout.html', linkName='Purchasing')
 
+@app.route('/temp')
+def temp():
+	return render_template('temp.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -180,10 +182,8 @@ def page_location_list():
 @app.route('/404')
 def error_404(e=None):
 	if e:
-		return 'not found', 404
-		#return render_template('404.html'), 404
-	return 'not found'
-	#return render_template('404.html')
+		return render_template('404.html'), 404
+	return render_template('404.html')
 
 #####@login_manager.unauthorized_handler
 def unauthorized():
