@@ -15,8 +15,10 @@
 /*@import (less) "lib/themes/headers/header1-orange.css";//*/
 
 // Our styles
+@import "mixins.less";
 @import "colors.less";
 @import "fonts.less";
+@import "navbar.less";
 @import "test.less";
 
 #logo {
@@ -24,5 +26,41 @@
 		display: block;
 		margin: auto;
 		padding: 0.5em 0em;
+	}
+}
+
+.navbar {
+	li.active {
+		text-decoration: underline;
+	}
+}
+
+ul.navigational {
+	@number: 4;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-size: 0;
+	> li {
+		width: 100% / 4;
+		@media all and (max-width: 479px) { // phone
+			width: 100%;
+		}
+		@media all and (min-width: 480px) and (max-width: 768px) { // tablet
+			width: 100% / 2;
+		}
+		vertical-align: top;
+		font-size: 1rem;
+		margin: 0 0 1.0em 0;
+		border: 0;
+		font-weight: bold;
+		list-style-type: none;
+		list-style-position: inside;
+		display: inline-block;
+		li {
+			font-weight: normal;
+			list-style-type: none;
+			list-style-position: inside;
+		}
 	}
 }

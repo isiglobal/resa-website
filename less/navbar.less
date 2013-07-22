@@ -1,0 +1,35 @@
+/*
+	Web Design and Scripting
+    Copyright (c) 2013 Brandon Thomas <bt@brand.io>
+	Includes Bootstrap, Unity Theme for Bootstrap, and more.
+	See more at http://brand.io
+*/
+
+
+// The following code fixes our navbar:
+// Looks less like Bootstrap (chromeless), and is centered.
+
+.navbar .navbar-inner {
+	border: 0;
+	background: none ;
+	.box-shadow(none) ;
+	.border-radius(0px) ;
+}
+
+.navbar .nav {
+    float: none;
+    text-align: center;
+}
+.navbar .nav > li {
+    float: none;
+    display: inline-block;
+}
+
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  color: inherit;
+  text-decoration: none;
+  background-color: inherit;
+  .box-shadow(none);
+}

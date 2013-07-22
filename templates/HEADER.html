@@ -7,19 +7,21 @@
   </div>
 </div>
 
-<div class="navbar">
+<div class="navbar" id="header">
   <div class="navbar-inner">
     <ul class="nav">
       <li {% if pageName =='IndexPage' %}class="active"{% endif %}><a 
           href="/">Home</a></li>
       <li {% if pageName =='NewsPage' %}class="active"{% endif %}><a 
           href="/">News</a></li>
+      <li {% if pageName =='ServicesPage' %}class="active"{% endif %}><a 
+          href="/">Services</a></li>
+      <li {% if pageName =='LearningPage' %}class="active"{% endif %}><a 
+          href="/">Professional Learning</a></li>
       <li {% if pageName =='PurchasingPage' %}class="active"{% endif %}><a 
           href="/purchasing">Purchasing</a></li>
       <li {% if pageName =='AboutPage' %}class="active"{% endif %}><a 
           href="/about">About</a></li>
-      <li {% if pageName =='TempPage' %}class="active"{% endif %}><a 
-          href="/temp">(Unity Design)</a></li>
     </ul>
   </div>
 </div>
