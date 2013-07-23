@@ -1,0 +1,22 @@
+{% extends "BASE.html" %}
+{% set pageName = 'ArticleListPage' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block body %}
+  <h2>Articles</h2>
+  <table class="table">
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Date</th>
+    </tr>
+    {% for art in articles %}
+      <tr>
+        <td>{{art.id}}</td>
+        <td><a href="{{art.get_url()}}">{{art.title}}</a></td>
+        <td>{{art.datetime_added}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock body %}
+

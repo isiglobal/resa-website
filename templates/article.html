@@ -1,0 +1,11 @@
+{% extends "BASE.html" %}
+{% set pageName = 'ArticleListPage' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block body %}
+  <h2>{{article.title}}</h2>
+  <div class="articleContent">
+    {{article.content_html|safe}}
+  </div>
+{% endblock body %}
+

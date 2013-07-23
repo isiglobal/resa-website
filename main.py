@@ -92,7 +92,16 @@ def articles():
 
 @app.route('/article/<url_key>', methods=['GET', 'POST', 'UPDATE', 'DELETE'])
 def article_view(url_key):
-	return url_key
+	article = None
+	try:
+		artId = url_key.split('-')[0]
+		article = database.session.query(Article) \
+					.filter_by(id=artId).one()
+	except:
+		pass
+	return render_template('article.html', article=article)
+
+
 
 @app.route('/purchasing')
 def purchasing():

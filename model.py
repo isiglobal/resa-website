@@ -52,7 +52,7 @@ class Article(Base):
 		self.content_html = markdown(self.content_mkdown)
 
 	def get_url(self):
-		return '/article/%s' % self.url_key
+		return '/article/%d-%s' % (self.id, self.url_key)
 
 	def serialize(self):
 		return {
