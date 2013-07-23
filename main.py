@@ -19,14 +19,13 @@ from flask import json, jsonify
 from flask.ext.login import LoginManager, UserMixin
 from flask.ext.login import login_user, login_required
 
-""" TODO: ENABLE THESE
+
 # XXX: You must create a non-versioned config file defining
 # the following: SECRET_KEY, USERS (list of username/passhash dicts)
 import config
 
 import database
 from model import *
-"""
 
 # -------------
 # CONFIGURATION
@@ -34,10 +33,11 @@ from model import *
 
 app = Flask(__name__)
 
-""" TODO: ENABLE THESE
-app.secret_key = config.SECRET_KEY
-app.config['USERS'] = config.USERS
 
+app.secret_key = config.SECRET_KEY
+#####app.config['USERS'] = config.USERS # TODO ENABLE THESE
+
+""" TODO: ENABLE THESE
 login_manager = LoginManager()
 login_manager.init_app(app)
 """
