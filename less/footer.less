@@ -1,0 +1,52 @@
+
+
+ul.navigational {
+	@number: 4;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-size: 0;
+	> li {
+		width: 100% / 4;
+		@media all and (max-width: 479px) { // phone
+			width: 100%;
+		}
+		@media all and (min-width: 480px) and (max-width: 768px) { // tablet
+			width: 100% / 2;
+		}
+		vertical-align: top;
+		font-size: 1rem;
+		margin: 0 0 1.0em 0;
+		border: 0;
+		font-weight: bold;
+		list-style-type: none;
+		list-style-position: inside;
+		display: inline-block;
+		li {
+			font-weight: normal;
+			list-style-type: none;
+			list-style-position: inside;
+		}
+	}
+}
+
+#footer {
+	.container {
+		background-color: @darkAlley;
+	}
+	padding: 0;
+	margin: 0;
+	font-size: 3.0em;
+	background-color: @darkAlley;
+	color: @white;
+	a {
+		color: @white;
+	}
+	div > ul > li {
+		text-transform: uppercase;
+	}
+	ul ul > li {
+		text-transform: none;
+	}
+}
+

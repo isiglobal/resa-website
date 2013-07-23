@@ -43,13 +43,13 @@ module.exports = function(grunt) {
 			},
 		},
 
-		sass: {
+		/*sass: {
 			main: {
 				files: {
 					'static/design.outsass.css': 'less/test.scss',
 				},
 			},
-		},
+		},*/
 
 		less: {
 			main: {
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 					'shell:alert',
 				],
 			},
-			sass: {
+			/*sass: {
 				files: [
 					'less/*.scss',
 					'less/lib/*.css',
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
 					'sass', 
 					'shell:alert',
 				],
-			},
+			},*/
 		},
 
 		shell: {
@@ -110,13 +110,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-neuter');
-	grunt.loadNpmTasks('grunt-sass');
+	//grunt.loadNpmTasks('grunt-sass');
 
 	// watch for changes
 	grunt.registerTask('default', [
 				//'neuter:script', 
 				//'uglify:script', 
-				'sass',
+				//'sass',
 				'less',
 				'watch',
 			]);
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 				//'neuter:script', 
 				//'uglify:script', 
-				'sass',
+				//'sass',
 				'less',
 			]);
 };
