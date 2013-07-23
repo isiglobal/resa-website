@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="West GA RESA Website">
-    <meta name="author" content="Brandon Thomas [bt@brand.io]">
+    <meta name="author" content="Brandon Thomas [http://brand.io]">
     <link rel="stylesheet" href="/static/design.out.css">
     <link rel="shortcut icon" href="/static/favicon.ico">        
   </head>	
@@ -16,10 +16,16 @@
     {% include "HEADER.html" %}
     <div id="main"> 
       <div class="container"> 
-        {{ pageName }}
         {% block body %}{% endblock body %}
       </div>
     </div>
     {% include "FOOTER.html" %}
+    {% if is_dev() %}
+      <script type="text/javascript"
+              src="/static/script.out.min.js{{ cache_buster() }}"></script>
+    {% else %}
+      <script type="text/javascript"
+              src="/static/script.out.js"></script>
+    {% endif %}
   </body>
 </html>	

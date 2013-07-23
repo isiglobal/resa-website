@@ -3,6 +3,11 @@
 """
 West GA Resa Website
 Copyright 2013 Brandon Thomas <bt@brand.io>
+
+	+ requires +
+		flask
+		flask-login
+		markdown
 """
 
 import os
@@ -62,6 +67,32 @@ elif uname in ['isimobile', 'root']:
 @app.route('/')
 def index():
 	return render_template('index.html')
+
+@app.route('/article', methods=['GET', 'POST', 'PUT'])
+def articles():
+	if request.method == 'POST' \
+	and request.form and len(request.form):
+
+		article = Article(
+			title = request.form['title'],
+			content_mkdown =request.form['content_mkdown'],
+		)
+
+		article.generate_url_key() # TODO: Autogenerate when title dirty
+		article.generate_html() # TODO: Not yet implemented
+
+		database.session.add(location)
+		database.session.commit()
+
+		return redirect('/article')
+
+	articles = database.session.query(Article).all()
+	return render_template('article_list.html', articles=articles)
+
+
+@app.route('/article/<url_key>', methods=['GET', 'POST', 'UPDATE', 'DELETE'])
+def article_view(url_key):
+	return url_key
 
 @app.route('/purchasing')
 def purchasing():
@@ -145,34 +176,33 @@ def location(locId):
 # AJAX API GATEWAY
 # ----------------
 
-@app.route('/api/locations', methods=['GET', 'POST'])
-def page_location_list():
+@app.route('/api/articles', methods=['GET', 'POST'])
+def api_articles():
 	if request.method == 'POST':
-		location = Location(
-			position_x = request.json['position_x'],
-			position_y = request.json['position_y'],
-			name = request.json['name'],
-			email = request.json['email'],
-			phone = request.json['phone'],
-			school = request.json['school'],
+		article = Article(
+			title = request.json['title'],
+			content_mkdown =request.json['content_mkdown'],
 		)
 
-		database.session.add(location)
+		article.generate_url_key() # TODO: Autogenerate when title dirty
+		article.generate_html() # TODO: Not yet implemented
+
+		database.session.add(article)
 		database.session.commit()
 
 		return 'OK' # TODO: status msg.
 
 	else:
-		locations = None
+		articles = None
 		try:
-			locations = database.session.query(Location).all()
+			articles = database.session.query(Article).all()
 		except:
 			pass
 
 		if not len(locations):
 			return '{}'
 
-		return json.dumps([x.serialize() for x in locations])
+		return json.dumps([x.serialize() for x in articles])
 
 # --------------
 # EVENT HANDLERS 
@@ -211,7 +241,7 @@ def is_dev():
 	return (app.config['ENVIRONMENT'] == 'dev')
 
 def cache_buster():
-	if not app.config['ENVIRONMENT_DEV']:
+	if not app.config['ENVIRONMENT'] or app.config['ENVIRONMENT'] != 'dev':
 		return ''
 	return '?%s' % str(random.randint(500, 9000000))
 

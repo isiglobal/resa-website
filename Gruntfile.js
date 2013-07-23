@@ -114,8 +114,8 @@ module.exports = function(grunt) {
 
 	// watch for changes
 	grunt.registerTask('default', [
-				//'neuter:script', 
-				//'uglify:script', 
+				'neuter:script', 
+				'uglify:script', 
 				//'sass',
 				'less',
 				'watch',
@@ -123,8 +123,8 @@ module.exports = function(grunt) {
 
 	// 'build' task, eg. for pre-commit hook
 	grunt.registerTask('build', [
-				//'neuter:script', 
-				//'uglify:script', 
+				'neuter:script', 
+				'uglify:script', 
 				//'sass',
 				'less',
 			]);

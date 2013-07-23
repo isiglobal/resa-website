@@ -9,6 +9,7 @@ import hashlib
 import random
 import string
 import json
+from markdown import markdown
 
 from sqlalchemy import Column, Integer, String, DateTime,\
 						Boolean, Table, Text, ForeignKey,\
@@ -43,8 +44,26 @@ class Article(Base):
 	content_mkdown = Column(Text)
 	content_html = Column(Text)
 
+	def generate_url_key(self):
+		# FIXME: replace ' '/'' is *NOT* wise or sufficient!
+		self.url_key = self.title[0:25].replace(' ', '_').lower()
+
+	def generate_html(self):
+		self.content_html = markdown(self.content_mkdown)
+
 	def get_url(self):
 		return '/article/%s' % self.url_key
+
+	def serialize(self):
+		return {
+			'id': self.id,
+			'datetime_added': self.datetime_added,
+			'datetime_edited': self.datetime_edited,
+			'title': self.title,
+			'url_key': self.url_key,
+			'content_mkdown': self.content_mkdown,
+			'content_html': self.content_html,
+		}
 
 class Page(Base):
 	__tablename__ = 'pages'
