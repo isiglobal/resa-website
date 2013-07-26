@@ -1,7 +1,8 @@
 
 var Article = Backbone.Model.extend({
-	urlRoot: '/api/articles',
+	urlRoot: '/api/article',
 	defaults: {
+		id: null,
 		datetime_added: null,
 		datetime_edited: null,
 		title: null,
@@ -13,6 +14,6 @@ var Article = Backbone.Model.extend({
 
 var Articles = Backbone.Collection.extend({
 	model: Article,
-	url: '/api/articles',
+	url: '/api/article',
 });
 

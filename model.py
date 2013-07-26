@@ -54,11 +54,24 @@ class Article(Base):
 	def get_url(self):
 		return '/article/%d-%s' % (self.id, self.url_key)
 
+	def set_from_json(self, json):
+		edited = False
+		if 'title' in json:
+			self.title = json['title']
+			edited = True
+		if 'content_mkdown' in json:
+			self.content_mkdown = json['content_mkdown']
+			self.generate_html()
+			edited = True
+
+		if edited:
+			self.datetime_edited = datetime.datetime.now()
+
 	def serialize(self):
 		return {
 			'id': self.id,
-			'datetime_added': self.datetime_added,
-			'datetime_edited': self.datetime_edited,
+			'datetime_added': str(self.datetime_added),
+			'datetime_edited': str(self.datetime_edited),
 			'title': self.title,
 			'url_key': self.url_key,
 			'content_mkdown': self.content_mkdown,

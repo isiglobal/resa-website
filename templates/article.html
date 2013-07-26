@@ -2,9 +2,23 @@
 {% set pageName = 'ArticleListPage' %}
 {% block title %}Welcome to West GA RESA{% endblock %}
 
+{% block extraBody %}
+<script type="text/javascript">
+  window.article = new Article({
+    id: {{article.id}},
+    datetime_added: '{{article.datetime_added}}',
+    datetime_edited: '{{article.datetime_added}}',
+    title: '{{article.title}}',
+    url_key: '{{article.url_key}}',
+    content_mkdown: '{{article.content_html|safe}}',
+    content_html: '{{article.content_html|safe}}',
+  });
+</script>
+{% endblock extraBody %}
+
 {% block body %}
   <h2>{{article.title}}</h2>
-  <div class="articleContent">
+  <div class="articleContent" data-id="{{article.id}}">
     {{article.content_html|safe}}
   </div>
 {% endblock body %}
