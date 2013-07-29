@@ -81,9 +81,19 @@ def format_datetime(dateStr, fmt=None):
 		fmt = '%b %d, %H:%M'
 	return date.strftime(fmt)
 
-def js_escape_string(string):
-	s = ''.join([s + "\\\n" for s in string.split('\n')])
-	return s.replace('\'', '\\\'')
+def js_escape_string(string, squo=True):
+	s = ''
+	print 'string', string, 'endstring'
+	try:
+		s = '\\\n'.join(string.split('\n'))
+		if squo:
+			s = s.replace('\'', '\\\'')
+		else:
+			s = s.replace('\"', '\\\"')
+
+	except:
+		s = ''
+	return s
 
 app.jinja_env.globals.update(is_dev=is_dev)
 app.jinja_env.globals.update(cache_buster=cache_buster)
