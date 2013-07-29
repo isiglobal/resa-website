@@ -83,9 +83,8 @@ def format_datetime(dateStr, fmt=None):
 
 def js_escape_string(string, squo=True):
 	s = ''
-	print 'string', string, 'endstring'
 	try:
-		s = '\\\n'.join(string.split('\n'))
+		s = '\\n'.join(string.split('\n'))
 		if squo:
 			s = s.replace('\'', '\\\'')
 		else:

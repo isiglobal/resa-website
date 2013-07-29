@@ -23,14 +23,17 @@
   <div id="article" data-id="{{article.id}}">
 
     <!-- Title components -->
-    <h1 class="title">{{article.title}}</h1>
-    <input class="title_edit" type="text" value="{{article.title}}">
+    <h1 class="title"></h1>
+    <input class="title_edit" type="text" value="">
+    <a href="#" class="title_edit_link">edit</a>
+    <br>
+    <br>
 
     <!-- Contents components -->
-    <div class="content"> 
-      {{article.content_html|safe}}
-    </div>
-    <textarea class="content_edit">{{article.content_mkdown}}</textarea>
+    <div class="content"></div>
+    <textarea class="content_edit"></textarea>
+    <br>
+    <a href="#" class="content_edit_link">edit</a>
   </div>
 {% endblock body %}
 

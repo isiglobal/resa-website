@@ -24,7 +24,9 @@ var ArticleView = Backbone.View.extend({
 	$content: null,
 	$content_edit: null,
 	events: {
+		'click .title_edit_link': 'editTitle',
 		'dblclick .title': 'editTitle',
+		'click .content_edit_link': 'editContent',
 		'dblclick .content': 'editContent',
 	},
 	initialize: function() {
@@ -34,17 +36,22 @@ var ArticleView = Backbone.View.extend({
 		this.$content = this.$el.find('.content');
 		this.$content_edit = this.$el.find('.content_edit');
 
+		this.render();
+
 		this.listenTo(this.model, 'change', this.render);
 		this.delegateEvents();
 	},
 	render: function() {
 		console.log('render');
-		console.log('render');
-		console.log('render');
+
 		this.$el.find('.title').html(this.model.get('title'));
+		this.$el.find('.title_edit').val(this.model.get('title'));
+
 		this.$el.find('.content').html(this.model.get('content_html'));
+		this.$el.find('.content_edit').html(this.model.get('content_mkdown'));
 	},
 	save: function() {
+		console.log('SAVE()');
 		var that = this;
 		this.$title_edit.val();
 		this.$content_edit.val();
