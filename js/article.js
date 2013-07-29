@@ -79,6 +79,32 @@ var ArticleView = Backbone.View.extend({
 			});
 	},
 	editContent: function() {
-		console.log('edit content');
+		var that = this,
+			$textarea = this.$el.find('.content_edit'),
+			$content = this.$el.find('.content');
+
+		$content.hide();
+		$textarea.show()
+			.focus()
+			.val($textarea.val())
+			.on('blur', function() {
+				console.log('blur event');
+				that.model.set('content_mkdown', $(this).val());
+
+				// XXX: Backbone is stupid and expects attrib hash for CBs
+				that.model.save({
+					//title: $(this).val(),
+				}, {
+					//patch: true,
+					success: function(model, resp, opts) {
+						console.log('model.save() success!');
+						$textarea.hide();
+						$content.show();
+					},
+					failure: function(model, xhr, opts) {
+						console.log('model.save() error!');
+					},
+				});
+			});
 	},
 });

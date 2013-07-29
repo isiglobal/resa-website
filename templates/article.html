@@ -10,8 +10,8 @@
     datetime_edited: '{{article.datetime_added}}',
     title: '{{article.title}}',
     url_key: '{{article.url_key}}',
-    content_mkdown: '{{article.content_mkdown}}',
-    content_html: '{{article.content_html|safe}}',
+    content_mkdown: '{{article.content_mkdown|use_in_js}}',
+    content_html: '{{article.content_html|use_in_js|safe}}',
   });
   window.articleview = new ArticleView({
     model: window.article,
@@ -21,8 +21,12 @@
 
 {% block body %}
   <div id="article" data-id="{{article.id}}">
-    <h2 class="title">{{article.title}}</h2>
+
+    <!-- Title components -->
+    <h1 class="title">{{article.title}}</h1>
     <input class="title_edit" type="text" value="{{article.title}}">
+
+    <!-- Contents components -->
     <div class="content"> 
       {{article.content_html|safe}}
     </div>
