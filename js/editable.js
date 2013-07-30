@@ -21,9 +21,10 @@ var Editable = Backbone.View.extend({
 		import('displayableField');
 
 		if('el' in args) {
-			console.log('el', args.el);
 			this.$el = $(args.el);
 		}
+
+		this.listenTo(this, 'changeMode', this.changeMode);
 	},
 
 	initialize: function(args) {
@@ -34,6 +35,10 @@ var Editable = Backbone.View.extend({
 	render: function() {
 		this.$displayEl.html(this.modelGetDisplayable());
 		this.$editEl.html(this.modelGetEditable());
+	},
+	changeMode: function() {
+		console.log('changed mode');
+		this.render();
 	},
 
 	// Accessors that abstract away DOM details
@@ -61,13 +66,45 @@ var Editable = Backbone.View.extend({
 	},
 
 	enterEdit: function() {
+		if(this.mode == 'edit') {
+			return;
+		}
 		this.mode = 'edit';
+		this.trigger('changeMode');
 	},
-	exitEdit: function() {
+	enterView: function() {
+		if(this.mode == 'view') {
+			return;
+		}
 		this.mode = 'view';
+		this.trigger('changeMode');
 	},
 
 	save: function() {
+		var that = this,
+			valMod = this.modelGetEditable(),
+			valDom = this.domGetEditable();
+	
+		if(valMod == valDom) {
+			this.enterView();
+			return;
+		}
+
+		// Sync DOM to model (XXX: Don't bind model:change!)
+		this.modelSetEditable(valDom);
+
+		this.model.save({
+			// XXX: Backbone is stupid and expects an attrib hash in 
+			// order for CBs to fire! (WTF, Backbone?!)
+		}, {
+			//patch: true,
+			success: function(model, resp, opts) {
+				that.enterView();
+			},
+			failure: function(model, xhr, opts) {
+				console.log('model.save() error!');
+			},
+		});
 	},
 });
 

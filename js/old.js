@@ -97,3 +97,14 @@ var ArticleView = Backbone.View.extend({
 	},
 });
 
+
+var EditableTextarea = Editable.extend({
+	// Accessors that abstract away DOM details
+	domGetEditable: function() {
+		return this.$editEl.val();
+	},
+	domSetEditable: function(val) {
+		this.$editEl.val(val);
+	}
+});
+
