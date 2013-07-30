@@ -11,6 +11,11 @@ require('lib/jquery.smooth-scroll.min');
 require('lib/underscore-min');
 require('lib/backbone-min');
 
+// Our data structures / libraries
+require('editable');
+
 // Custom code
 require('article');
+require('titleview');
+require('old'); // FIXME: Remove
 

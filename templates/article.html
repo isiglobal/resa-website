@@ -13,8 +13,15 @@
     content_mkdown: '{{article.content_mkdown|use_in_js}}',
     content_html: '{{article.content_html|use_in_js|safe}}',
   });
-  window.articleview = new ArticleView({
+  /*window.articleview = new ArticleView({
     model: window.article,
+  });*/
+  window.editTextarea = new EditableContentView({
+    model: window.article,
+    el: '.contentWrap',
+    displayEl: '.content',
+    editableField: 'content_mkdown',
+    displayableField: 'content_html',
   });
 </script>
 {% endblock extraBody %}
@@ -30,10 +37,12 @@
     <br>
 
     <!-- Contents components -->
-    <div class="content"></div>
-    <textarea class="content_edit"></textarea>
-    <br>
-    <a href="#" class="content_edit_link">edit</a>
+    <div class="contentWrap">
+      <div class="content"></div>
+      <textarea class="content_edit"></textarea>
+      <br>
+      <a href="#" class="content_edit_link">edit</a>
+    </div>
   </div>
 {% endblock body %}
 
