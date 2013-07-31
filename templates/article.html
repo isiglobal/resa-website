@@ -16,12 +16,22 @@
   /*window.articleview = new ArticleView({
     model: window.article,
   });*/
-  window.editTextarea = new EditableContentView({
+  window.articleTitle = new EditableView({
+    model: window.article,
+    el: '.titleWrap',
+    displayEl: '.display',
+    editableField: 'title',
+    displayableField: 'title',
+    title: 'title',
+  });
+
+  window.articleContent = new EditableView({
     model: window.article,
     el: '.contentWrap',
-    displayEl: '.content',
+    displayEl: '.display',
     editableField: 'content_mkdown',
     displayableField: 'content_html',
+    title: 'article',
   });
 </script>
 {% endblock extraBody %}
@@ -30,18 +40,23 @@
   <div id="article" data-id="{{article.id}}">
 
     <!-- Title components -->
-    <h1 class="title"></h1>
-    <input class="title_edit" type="text" value="">
-    <a href="#" class="title_edit_link">edit</a>
+    <div class="titleWrap">
+      <h1 class="display"></h1>
+      <input class="edit" type="text" value="">
+      <button class="edit_link">edit title</button>
+      <div class="clear"></div>
+    </div>
+
     <br>
     <br>
 
     <!-- Contents components -->
     <div class="contentWrap">
-      <div class="content"></div>
-      <textarea class="content_edit"></textarea>
+      <div class="display"></div>
+      <textarea class="edit"></textarea>
       <br>
-      <a href="#" class="content_edit_link">edit</a>
+      <button class="edit_link">edit content</button>
+      <div class="clear"></div>
     </div>
   </div>
 {% endblock body %}

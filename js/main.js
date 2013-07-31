@@ -4,18 +4,14 @@
   Copyright (c) 2013 West GA RESA
 */
 
-// Libraries
-require('lib/jquery');
-require('lib/jquery.easing');
-require('lib/jquery.smooth-scroll.min');
-require('lib/underscore-min');
-require('lib/backbone-min');
+// Model
+require('article');
 
-// Our data structures / libraries
+// Inheritable views
 require('editable');
 
 // Custom code
-require('article');
-require('titleview');
-require('old'); // FIXME: Remove
+require('content');
+require('title');
 
+require('old');

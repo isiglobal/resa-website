@@ -6,6 +6,8 @@ var Editable = Backbone.View.extend({
 	editableField: null,
 	displayableField: null,
 	mode: 'view', // state: view || edit 
+	title: 'content', // descriptive. eg. 'title', 'article', 'content'
+	editType: 'textarea', // textarea || input
 
 	_init: function(args) {
 		var that = this,
@@ -15,10 +17,9 @@ var Editable = Backbone.View.extend({
 				}
 			};
 
-		import('$displayEl');
-		import('$editEl');
 		import('editableField');
 		import('displayableField');
+		import('title');
 
 		if('el' in args) {
 			this.$el = $(args.el);
@@ -33,6 +34,7 @@ var Editable = Backbone.View.extend({
 	},
 
 	render: function() {
+		console.log(this.$editEl);
 		this.$displayEl.html(this.modelGetDisplayable());
 		this.$editEl.html(this.modelGetEditable());
 	},
@@ -66,6 +68,7 @@ var Editable = Backbone.View.extend({
 	},
 
 	enterEdit: function() {
+		console.log('enterEdit');
 		if(this.mode == 'edit') {
 			return;
 		}

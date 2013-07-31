@@ -1,16 +1,30 @@
-#article {
-	padding: 2em;
-	.title {
-		text-decoration: underline;
-	}
-	.title_edit {
-		display: none;
-	}
-	.content_edit {
+.editable {
+	.edit {
 		display: none;
 	}
 	textarea {
 		width: 100%;
 		min-height: 400px;
+	}
+	input {
+	}
+	.edit_link {
+		float: right;
+	}
+}
+
+#article {
+	padding: 2em;
+	.titleWrap {
+		.editable; // XXX: SET EDITABLE
+		.title{
+			text-decoration: underline;
+		}
+	}
+	.contentWrap {
+		.editable; // XXX: SET EDITABLE
+		.title{
+			text-decoration: underline;
+		}
 	}
 }

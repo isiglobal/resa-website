@@ -22,9 +22,14 @@
     {% include "FOOTER.html" %}
     {% if is_dev() %}
       <script type="text/javascript"
+              src="/static/libraries.out.min.js{{ cache_buster() }}"></script>
+      <script type="text/javascript"
               src="/static/script.out.min.js{{ cache_buster() }}"></script>
     {% else %}
-      <script type="text/javascript" src="/static/script.out.min.js"></script>
+      <script type="text/javascript" 
+              src="/static/libraries.out.min.js"></script>
+      <script type="text/javascript" 
+              src="/static/script.out.min.js"></script>
     {% endif %}
     {% block extraBody %}{% endblock %}
   </body>

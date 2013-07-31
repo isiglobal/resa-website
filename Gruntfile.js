@@ -25,6 +25,21 @@ module.exports = function(grunt) {
 					dest: 'static/script.out.js',
 				}],
 			},
+
+			libraries: {
+				options: {
+					filepathTransform: function(fp) {
+						return './js/' + fp;
+					},
+					includeSourceURL: false,
+					//template: '(function){ {%= src %} })();',
+					template: '{%= src %}', // For now. Eventually: wrap.frag.
+				},
+				files: [{
+					src: 'js/libraries.js',
+					dest: 'static/libraries.out.js',
+				}],
+			},
 		},
 
 		uglify: {
@@ -35,6 +50,13 @@ module.exports = function(grunt) {
 					'<%= meta.copyright %> ' +
 					'*/\n',
 			},
+			libraries: {
+				files: [{
+					src: 'static/libraries.out.js',
+					dest: 'static/libraries.out.min.js',
+				}],
+			},
+
 			script: {
 				files: [{
 					src: 'static/script.out.js',
@@ -67,6 +89,15 @@ module.exports = function(grunt) {
 				tasks: [
 					'neuter:script', 
 					'uglify:script', 
+					'shell:alert',
+				],
+			},
+
+			libraries: {
+				files: ['js/libraries.js'],
+				tasks: [
+					'neuter:libraries', 
+					'uglify:libraries', 
 					'shell:alert',
 				],
 			},
@@ -114,6 +145,8 @@ module.exports = function(grunt) {
 
 	// watch for changes
 	grunt.registerTask('default', [
+				'neuter:libraries', 
+				'uglify:libraries', 
 				'neuter:script', 
 				'uglify:script', 
 				//'sass',
@@ -123,6 +156,8 @@ module.exports = function(grunt) {
 
 	// 'build' task, eg. for pre-commit hook
 	grunt.registerTask('build', [
+				'neuter:libraries', 
+				'uglify:libraries', 
 				'neuter:script', 
 				'uglify:script', 
 				//'sass',
