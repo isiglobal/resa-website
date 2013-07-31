@@ -75,6 +75,8 @@ def cache_buster():
 	return '?%s' % str(random.randint(500, 9000000))
 
 def format_datetime(dateStr, fmt=None):
+	if not dateStr:
+		return 'No date'
 	dateStr = str(dateStr) # FIXME: Already a date object?
 	date = dateutil.parser.parse(dateStr)
 	if not fmt:
