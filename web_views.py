@@ -33,6 +33,28 @@ def articles():
 	articles = database.session.query(Article).all()
 	return render_template('article_list.html', articles=articles)
 
+@app.route('/article_new', methods=['GET', 'POST', 'PUT'])
+def article_new():
+	if request.method == 'POST' \
+	and request.form and len(request.form):
+
+		article = Article(
+			title = request.form['title'],
+			content_mkdown =request.form['content_mkdown'],
+		)
+
+		article.generate_url_key() # TODO: Autogenerate when title dirty
+		article.generate_html() # TODO: Not yet implemented
+
+		database.session.add(article)
+		database.session.commit()
+
+		return redirect('/article')
+
+	articles = database.session.query(Article).all()
+	return render_template('article_new.html')
+
+
 @app.route('/article/<url_key>')
 def article_view(url_key):
 	article = None

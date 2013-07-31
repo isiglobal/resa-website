@@ -14,4 +14,5 @@ require('editable');
 require('content');
 require('title');
 
-require('old');
+require('simple_scripting');
+

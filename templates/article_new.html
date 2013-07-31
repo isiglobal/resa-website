@@ -1,0 +1,17 @@
+{% extends "BASE.html" %}
+{% set pageName = 'ArticleNewPage' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block body %}
+  <h2>New Article</h2>
+  <form action="" method="post">
+    <h4>Title</h4>
+    <input name="title"> 
+    <h4>Content</h4>
+    <textarea name="content_mkdown"></textarea>
+    <br>
+    <br>
+    <button>Create!</button>
+  </form>
+{% endblock body %}
+
