@@ -1,0 +1,25 @@
+{% extends "BASE.html" %}
+{% set pageName = 'ArticleListPage' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block body %}
+  <button class="createPage top">Create New</button>
+  <h2>Pages</h2>
+  <div class="clear"></div>
+  <table class="table">
+    <tr>
+      <!--<th>Id</th>-->
+      <th>Simple Name</th>
+      <th>Date</th>
+    </tr>
+    {% for p in pages %}
+      <tr>
+        <!--<td>{{p.id}}</td>-->
+        <td><a href="{{p.get_url()}}">{{p.name}}</a></td>
+        <td>{{p.datetime_added|datetime}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <button class="createPage bottom">Create New</button>
+{% endblock body %}
+

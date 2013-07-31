@@ -31,6 +31,34 @@ def api_article(url_key):
 
 		return json.dumps(article.serialize())
 
+@app.route('/api/page/<pid>',
+		methods=['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
+def api_page(pid):
+	#pageId = url_key.split('-')[0] # TODO: Not safe. Error prone
+	page = None
+
+	if request.method == 'GET':
+		try:
+			page = database.session.query(Page) \
+						.filter_by(id=pid).one()
+		except:
+			pass
+		return json.dumps(page.serialize())
+
+	elif request.method in ['PUT', 'POST', 'PATCH']:
+		try:
+			page = database.session.query(Page) \
+						.filter_by(id=pid).one()
+			page.set_from_json(request.json)
+			database.session.commit()
+
+		except Exception as e:
+			print 'exception', e
+			return 'FAIL' # TODO FAILURE RESPONSE CODE
+
+		return json.dumps(page.serialize())
+
+
 
 # TODO: THIS IS DEPRECATED, I THINK
 # TODO: THIS IS DEPRECATED, I THINK

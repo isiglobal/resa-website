@@ -24,6 +24,7 @@ from flask import send_from_directory, send_file, redirect
 from flask import json, jsonify
 from flask.ext.login import LoginManager, UserMixin
 from flask.ext.login import login_user, login_required
+from werkzeug.exceptions import HTTPException, NotFound
 
 # ----------------
 # APPLICATION CODE

@@ -1,4 +1,5 @@
 from app import *
+from werkzeug.exceptions import HTTPException, NotFound
 
 # -------------
 # WEBSITE PAGES
@@ -25,7 +26,7 @@ def articles():
 		article.generate_url_key() # TODO: Autogenerate when title dirty
 		article.generate_html() # TODO: Not yet implemented
 
-		database.session.add(location)
+		database.session.add(article)
 		database.session.commit()
 
 		return redirect('/article')
@@ -51,7 +52,6 @@ def article_new():
 
 		return redirect('/article')
 
-	articles = database.session.query(Article).all()
 	return render_template('article_new.html')
 
 
@@ -66,6 +66,67 @@ def article_view(url_key):
 		pass
 
 	return render_template('article.html', article=article)
+
+
+# -------------
+# PAGE SYSTEM PAGES
+# -------------
+
+@app.route('/page', methods=['GET', 'POST', 'PUT'])
+def pages():
+	if request.method == 'POST' \
+	and request.form and len(request.form):
+
+		page = Page(
+			name = request.form['name'],
+			content_mkdown =request.form['content_mkdown'],
+		)
+
+		page.generate_url_key() # TODO: Autogenerate when title dirty
+		page.generate_html() # TODO: Not yet implemented
+
+		database.session.add(page)
+		database.session.commit()
+
+		return redirect('/page')
+
+	pages = database.session.query(Page).all()
+	return render_template('page_list.html', pages=pages)
+
+@app.route('/page_new', methods=['GET', 'POST', 'PUT'])
+def page_new():
+	if request.method == 'POST' \
+	and request.form and len(request.form):
+
+		page = Page(
+			name = request.form['name'],
+			content_mkdown =request.form['content_mkdown'],
+		)
+
+		page.generate_url_key() # TODO: Autogenerate when title dirty
+		page.generate_html() # TODO: Not yet implemented
+
+		database.session.add(page)
+		database.session.commit()
+
+		return redirect('/page')
+
+	return render_template('page_new.html')
+
+
+@app.route('/page/<url_key>')
+def page_view(url_key):
+	page = None
+	try:
+		#pageId = url_key.split('-')[0]
+		pageId = url_key
+		page = database.session.query(Page) \
+					.filter_by(url_key=pageId).one()
+	except:
+		raise NotFound
+
+	return render_template('page.html', page=page)
+
 
 # ----------
 # MISC PAGES

@@ -58,6 +58,7 @@ class Article(Base):
 		edited = False
 		if 'title' in json:
 			self.title = json['title']
+			self.generate_url_key()
 			edited = True
 		if 'content_mkdown' in json:
 			self.content_mkdown = json['content_mkdown']
@@ -92,8 +93,42 @@ class Page(Base):
 	content_mkdown = Column(Text)
 	content_html = Column(Text)
 
+	def generate_url_key(self):
+		# FIXME: replace ' '/'' is *NOT* wise or sufficient!
+		self.url_key = self.name[0:25].replace(' ', '_').lower()
+
+	def generate_html(self):
+		self.content_html = markdown(self.content_mkdown)
+
 	def get_url(self):
 		return '/page/%s' % self.url_key
+
+	def set_from_json(self, json):
+		edited = False
+		if 'name' in json:
+			self.name = json['name']
+			self.generate_url_key()
+			edited = True
+		if 'content_mkdown' in json:
+			self.content_mkdown = json['content_mkdown']
+			self.generate_html()
+			edited = True
+
+		if edited:
+			self.datetime_edited = datetime.datetime.now()
+
+	def serialize(self):
+		return {
+			'id': self.id,
+			'datetime_added': str(self.datetime_added),
+			'datetime_edited': str(self.datetime_edited),
+			'name': self.name,
+			'url_key': self.url_key,
+			'content_mkdown': self.content_mkdown,
+			'content_html': self.content_html,
+		}
+
+
 
 class Tag(Base):
 	__tablename__ = 'tags'

@@ -1,9 +1,13 @@
 // IN a hurry.
 
-console.log('asdfasdfasdfasdf');
-
 $('.createArticle').on('click', 
 	function() {
-		console.log('pushed');
 		location.href = '/article_new';
+		return;
+	});
+
+$('.createPage').on('click', 
+	function() {
+		location.href = '/page_new';
+		return;
 	});
