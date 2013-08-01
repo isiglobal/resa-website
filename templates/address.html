@@ -1,0 +1,20 @@
+{% extends "BASE.html" %}
+{% set pageName = 'AddressPage' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block extraBody %}
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAywYAfLDcvJj51_hA5_DuGzL7Vm7RyEz4&sensor=false"></script>
+  <script type="text/javascript">
+     google.maps.event.addDomListener(window, 'load', initialize_maps);
+   </script>
+{% endblock extraBody %}
+
+{% block body %}
+  <div id="address">
+    <h1><i class="icon-home"></i> Location</h1>
+    <h4>99 Brown School Drive<br>
+        Grantville, GA, 30220</h4>
+  </div>
+  <div id="maps"></div>
+{% endblock body %}

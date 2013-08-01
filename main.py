@@ -17,6 +17,7 @@ import getpass
 import hashlib
 import datetime
 import dateutil
+import simplejson
 import dateutil.parser
 
 from flask import Flask, render_template, url_for, request
@@ -87,11 +88,24 @@ def format_datetime(dateStr, fmt=None):
 def js_escape_string(string, squo=True):
 	s = ''
 	try:
-		s = '\\n'.join(string.split('\n'))
+		#s = '\\n'.join(string.split('\n'))
+		print '----------'
+		print string
+		print '---------'
+		s = simplejson.dumps(string)
+		print s
+		print '----------'
+		print s[1:-1]
+		s = s[1:-1]
+		print '----------'
+		#s = JSONEncoderForHTML.dumps(string)
+		"""
+		print s
 		if squo:
 			s = s.replace('\'', '\\\'')
 		else:
 			s = s.replace('\"', '\\\"')
+		"""
 
 	except:
 		s = ''

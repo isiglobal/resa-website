@@ -1,0 +1,39 @@
+# Temp files, dotfiles, config, tooling, etc
+.git/
+.gitignore
+.dropbox
+*~
+*pyc
+
+# Build and deploy tools, dirs
+node_modules/
+less/
+js/
+output/
+upload_production.sh
+upload_staging.sh
+deploy_production.sh
+deploy_staging.sh
+build.py
+
+# Misc
+ignoreme
+exclude.txt
+README.md
+
+# Slav's design work
+*asset*pdf
+*asset*key
+*asset*ai
+*pdf
+*key
+*ai
+
+# Project-specific
+static/
+img/ASSET_ORIGINAL
+static/img/ASSET_ORIGINAL
+
+# Databases
+database.sqlite
+_database.sqlite

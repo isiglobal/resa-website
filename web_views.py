@@ -9,29 +9,47 @@ from werkzeug.exceptions import HTTPException, NotFound
 def index():
 	return render_template('index.html')
 
+
+@app.route('/location')
+def index():
+	return render_template('address.html')
+
+
 # -------------
 # ARTICLE PAGES
 # -------------
 
 @app.route('/article', methods=['GET', 'POST', 'PUT'])
 def articles():
-	if request.method == 'POST' \
-	and request.form and len(request.form):
+	articles = None
+	print 'view entered'
 
-		article = Article(
-			title = request.form['title'],
-			content_mkdown =request.form['content_mkdown'],
-		)
+	try:
+		if request.method == 'POST' \
+		and request.form and len(request.form):
 
-		article.generate_url_key() # TODO: Autogenerate when title dirty
-		article.generate_html() # TODO: Not yet implemented
+			article = Article(
+				title = request.form['title'],
+				content_mkdown =request.form['content_mkdown'],
+			)
 
-		database.session.add(article)
-		database.session.commit()
+			article.generate_url_key() # TODO: Autogenerate when dirty
+			article.generate_html() # TODO: Not yet implemented
 
-		return redirect('/article')
+			database.session.add(article)
+			database.session.commit()
 
-	articles = database.session.query(Article).all()
+			return redirect('/article')
+
+		articles = database.session.query(Article).all()
+
+	except Exception as e:
+		print 'exception', e
+		raise e
+
+	print 'articles queried...'
+	print articles
+
 	return render_template('article_list.html', articles=articles)
 
 @app.route('/article_new', methods=['GET', 'POST', 'PUT'])

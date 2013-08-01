@@ -15,4 +15,5 @@ require('content');
 require('title');
 
 require('simple_scripting');
+require('maps');
 

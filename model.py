@@ -46,10 +46,10 @@ class Article(Base):
 
 	def generate_url_key(self):
 		# FIXME: replace ' '/'' is *NOT* wise or sufficient!
-		self.url_key = self.title[0:25].replace(' ', '_').lower()
+		self.url_key = self.title[0:25].replace(' ', '-').lower()
 
 	def generate_html(self):
-		self.content_html = markdown(self.content_mkdown)
+		self.content_html = markdown(self.content_mkdown, ['headerid'])
 
 	def get_url(self):
 		return '/article/%d-%s' % (self.id, self.url_key)
@@ -95,10 +95,10 @@ class Page(Base):
 
 	def generate_url_key(self):
 		# FIXME: replace ' '/'' is *NOT* wise or sufficient!
-		self.url_key = self.name[0:25].replace(' ', '_').lower()
+		self.url_key = self.name[0:25].replace(' ', '-').lower()
 
 	def generate_html(self):
-		self.content_html = markdown(self.content_mkdown)
+		self.content_html = markdown(self.content_mkdown, ['headerid'])
 
 	def get_url(self):
 		return '/page/%s' % self.url_key
