@@ -2,12 +2,12 @@
 
 $('.createArticle').on('click', 
 	function() {
-		location.href = '/article_new';
+		location.href = '/article/new';
 		return;
 	});
 
 $('.createPage').on('click', 
 	function() {
-		location.href = '/page_new';
+		location.href = '/page/new';
 		return;
 	});

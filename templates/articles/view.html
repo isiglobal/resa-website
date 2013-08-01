@@ -1,63 +1,16 @@
 {% extends "BASE.html" %}
-{% set pageName = 'ArticleListPage' %}
+{% set pageName = 'ArticleView' %}
 {% block title %}Welcome to West GA RESA{% endblock %}
 
-{% block extraBody %}
-<script type="text/javascript">
-  window.article = new Article({
-    id: {{article.id}},
-    datetime_added: '{{article.datetime_added}}',
-    datetime_edited: '{{article.datetime_added}}',
-    title: '{{article.title}}',
-    url_key: '{{article.url_key}}',
-    content_mkdown: "{{article.content_mkdown|use_in_js}}",
-    content_html: "{{article.content_html|use_in_js|safe}}",
-  });
-  /*window.articleview = new ArticleView({
-    model: window.article,
-  });*/
-  window.articleTitle = new EditableView({
-    model: window.article,
-    el: '.titleWrap',
-    displayEl: '.display',
-    editableField: 'title',
-    displayableField: 'title',
-    title: 'title',
-  });
-
-  window.articleContent = new EditableView({
-    model: window.article,
-    el: '.contentWrap',
-    displayEl: '.display',
-    editableField: 'content_mkdown',
-    displayableField: 'content_html',
-    title: 'article',
-  });
-</script>
-{% endblock extraBody %}
-
 {% block body %}
-  <div id="article" data-id="{{article.id}}">
-
-    <!-- Title components -->
-    <div class="titleWrap">
-      <h1 class="display"></h1>
-      <input class="edit" type="text" value="">
-      <button class="edit_link">edit title</button>
-      <div class="clear"></div>
-    </div>
-
-    <br>
-    <br>
-
-    <!-- Contents components -->
-    <div class="contentWrap">
-      <div class="display"></div>
-      <textarea class="edit"></textarea>
-      <br>
-      <button class="edit_link">edit content</button>
-      <div class="clear"></div>
-    </div>
+  <div id="page" data-id="{{article.id}}">
+    {{article.content_html|safe}}
   </div>
+  <br>
+  <hr>
+  <ul>
+    <li><a href="{{article.get_edit_url()}}">Edit Article</a></li>
+    <li><a href="/article/list">View All Articles</a></li>
+  </ul>
 {% endblock body %}
 

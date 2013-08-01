@@ -1,5 +1,5 @@
 {% extends "BASE.html" %}
-{% set pageName = 'ArticleListPage' %}
+{% set pageName = 'ArticleEdit' %}
 {% block title %}Welcome to West GA RESA{% endblock %}
 
 {% block extraBody %}
@@ -58,6 +58,14 @@
       <button class="edit_link">edit content</button>
       <div class="clear"></div>
     </div>
+  </div>
+  <br>
+  <hr>
+  <div class="links">
+    <ul>
+      <li><a href="{{article.get_url()}}">View Article</a></li>
+      <li><a href="/article/list">Article List</a></li>
+    </ul>
   </div>
 {% endblock body %}
 

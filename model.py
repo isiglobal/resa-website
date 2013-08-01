@@ -54,6 +54,9 @@ class Article(Base):
 	def get_url(self):
 		return '/article/%d-%s' % (self.id, self.url_key)
 
+	def get_edit_url(self):
+		return '/article/edit/%d-%s' % (self.id, self.url_key)
+
 	def set_from_json(self, json):
 		edited = False
 		if 'title' in json:

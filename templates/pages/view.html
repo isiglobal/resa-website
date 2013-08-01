@@ -6,6 +6,11 @@
   <div id="page" data-id="{{page.id}}">
     {{page.content_html|safe}}
   </div>
-  <button id="pageEdit" data-url="{{page.get_edit_url()}}">Edit Page</button>
+  <br>
+  <hr>
+  <ul>
+    <li><a href="{{page.get_edit_url()}}">Edit Page</a></li>
+    <li><a href="/page/list">View All Pages</a></li>
+  </ul>
 {% endblock body %}
 

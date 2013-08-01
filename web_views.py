@@ -26,7 +26,7 @@ def address():
 # ARTICLE SYSTEM
 # ---------------
 
-@app.route('/article', methods=['GET', 'POST', 'PUT'])
+@app.route('/article/list', methods=['GET', 'POST', 'PUT'])
 def articles():
 	articles = None
 	print 'view entered'
@@ -46,7 +46,7 @@ def articles():
 			database.session.add(article)
 			database.session.commit()
 
-			return redirect('/article')
+			return redirect('/article/list')
 
 		articles = database.session.query(Article).all()
 
@@ -54,12 +54,9 @@ def articles():
 		print 'exception', e
 		raise e
 
-	print 'articles queried...'
-	print articles
+	return render_template('articles/list.html', articles=articles)
 
-	return render_template('article_list.html', articles=articles)
-
-@app.route('/article_new', methods=['GET', 'POST', 'PUT'])
+@app.route('/article/new', methods=['GET', 'POST', 'PUT'])
 def article_new():
 	if request.method == 'POST' \
 	and request.form and len(request.form):
@@ -75,10 +72,9 @@ def article_new():
 		database.session.add(article)
 		database.session.commit()
 
-		return redirect('/article')
+		return redirect('/article/list')
 
-	return render_template('article_new.html')
-
+	return render_template('articles/create.html')
 
 @app.route('/article/<url_key>')
 def article_view(url_key):
@@ -90,7 +86,19 @@ def article_view(url_key):
 	except:
 		pass
 
-	return render_template('article.html', article=article)
+	return render_template('articles/view.html', article=article)
+
+@app.route('/article/edit/<url_key>')
+def article_edit(url_key):
+	article = None
+	try:
+		artId = url_key.split('-')[0]
+		article = database.session.query(Article) \
+					.filter_by(id=artId).one()
+	except:
+		pass
+
+	return render_template('articles/edit.html', article=article)
 
 
 # ------------
