@@ -26,12 +26,12 @@ function initialize_maps()
 			zoom: 15,
 			draggable: true,
 			disableDefaultUI: false,
-			panControl: true,
-			zoomControl: true,
-			mapTypeControl: true,
-			scaleControl: true,
-			streetViewControl: true,
-			overviewMapControl: true,
+			panControl: false,
+			zoomControl: false,
+			mapTypeControl: false,
+			scaleControl: false,
+			streetViewControl: false,
+			overviewMapControl: false,
 			disableDoubleClickZoom: false,
 			scrollwheel: true,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -40,19 +40,6 @@ function initialize_maps()
 
 	// New post-Google IO design
 	google.maps.visualRefresh = true;
-
-	var mark = new google.maps.Marker({
-		position: resa,
-		draggable: false,
-		clickable: true,
-		flat: true,
-		map: map,
-		title: 'West GA Resa',
-		zIndex: 90000,
-		visible: true,
-		//icon: GOOGLE_ICON_IMG,
-		//shadow: SHADOW_IMG,
-	});
 
 	// I believe removing the 'report error' link falls within
 	// Google's usage terms. If they tell us no, we can revert
@@ -72,6 +59,19 @@ function initialize_maps()
 	var map = new google.maps.Map(
 		document.getElementById('maps'),
 		mapOptions);
+
+	var mark = new google.maps.Marker({
+		position: resa,
+		draggable: false,
+		clickable: true,
+		flat: true,
+		map: map,
+		title: 'West GA Resa',
+		zIndex: 90000,
+		visible: true,
+		//icon: GOOGLE_ICON_IMG,
+		//shadow: SHADOW_IMG,
+	});
 
 	mark.setMap(map);
 
@@ -122,6 +122,6 @@ function initialize_maps()
 	google.maps.event.addListener(map, 'dragend', function() {
 		setTimeout(function() {
 			map.panTo(center);
-		}, 400);
+		}, 2000);
 	});
 }

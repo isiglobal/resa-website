@@ -3,11 +3,18 @@
 {% block title %}Welcome to West GA RESA{% endblock %}
 
 {% block body %}
-<h1>This is the index page!</h1>
-<br>
-<h4>Content Pending Design...</h4>
-<p>Please see the design docs for possible layouts for the home page.</p>
-<p>If a page is named 'index', that will be displayed instead.</p>
+  {% if page %}
+    <div id="page" data-id="{{page.id}}">
+      {{page.content_html|safe}}
+    </div>
+     
+  {% else %}
+    <h1>This is the index page!</h1>
+    <br>
+    <h4>Content Pending Design...</h4>
+    <p>Please see the design docs for possible layouts for the home page.</p>
+    <p>If a page is named 'index', that will be displayed instead.</p>
+  {% endif %}
 
 {% endblock body %}
 
