@@ -100,6 +100,9 @@ class Page(Base):
 	def generate_html(self):
 		self.content_html = markdown(self.content_mkdown, ['headerid'])
 
+	def get_edit_url(self):
+		return '/page/edit/%s' % self.url_key
+
 	def get_url(self):
 		return '/page/%s' % self.url_key
 

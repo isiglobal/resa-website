@@ -4,43 +4,46 @@
 
 {% block extraBody %}
 <script type="text/javascript">
-  window.page = new Page({
-    id: {{page.id}},
-    datetime_added: '{{page.datetime_added}}',
-    datetime_edited: '{{page.datetime_added}}',
-    name: '{{page.name}}',
-    url_key: '{{page.url_key}}',
-    content_mkdown: "{{page.content_mkdown|use_in_js}}",
-    content_html: "{{page.content_html|use_in_js|safe}}",
+  window.article = new Article({
+    id: {{article.id}},
+    datetime_added: '{{article.datetime_added}}',
+    datetime_edited: '{{article.datetime_added}}',
+    title: '{{article.title}}',
+    url_key: '{{article.url_key}}',
+    content_mkdown: "{{article.content_mkdown|use_in_js}}",
+    content_html: "{{article.content_html|use_in_js|safe}}",
   });
-  window.pageName = new EditableView({
-    model: window.page,
-    el: '.nameWrap',
+  /*window.articleview = new ArticleView({
+    model: window.article,
+  });*/
+  window.articleTitle = new EditableView({
+    model: window.article,
+    el: '.titleWrap',
     displayEl: '.display',
-    editableField: 'name',
-    displayableField: 'name',
-    title: 'name',
+    editableField: 'title',
+    displayableField: 'title',
+    title: 'title',
   });
 
-  window.pageContent = new EditableView({
-    model: window.page,
+  window.articleContent = new EditableView({
+    model: window.article,
     el: '.contentWrap',
     displayEl: '.display',
     editableField: 'content_mkdown',
     displayableField: 'content_html',
-    title: 'page',
+    title: 'article',
   });
 </script>
 {% endblock extraBody %}
 
 {% block body %}
-  <div id="page" data-id="{{page.id}}">
+  <div id="article" data-id="{{article.id}}">
 
     <!-- Title components -->
-    <div class="nameWrap">
+    <div class="titleWrap">
       <h1 class="display"></h1>
       <input class="edit" type="text" value="">
-      <button class="edit_link">edit simple name</button>
+      <button class="edit_link">edit title</button>
       <div class="clear"></div>
     </div>
 

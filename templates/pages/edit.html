@@ -1,0 +1,68 @@
+{% extends "BASE.html" %}
+{% set pageName = 'PageEdit' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block extraBody %}
+<script type="text/javascript">
+  window.page = new Page({
+    id: {{page.id}},
+    datetime_added: '{{page.datetime_added}}',
+    datetime_edited: '{{page.datetime_added}}',
+    name: '{{page.name}}',
+    url_key: '{{page.url_key}}',
+    content_mkdown: "{{page.content_mkdown|use_in_js}}",
+    content_html: "{{page.content_html|use_in_js|safe}}",
+  });
+  window.pageName = new EditableView({
+    model: window.page,
+    el: '.nameWrap',
+    displayEl: '.display',
+    editableField: 'name',
+    displayableField: 'name',
+    title: 'name',
+  });
+
+  window.pageContent = new EditableView({
+    model: window.page,
+    el: '.contentWrap',
+    displayEl: '.display',
+    editableField: 'content_mkdown',
+    displayableField: 'content_html',
+    title: 'page',
+  });
+</script>
+{% endblock extraBody %}
+
+{% block body %}
+  <div id="page" data-id="{{page.id}}">
+
+    <!-- Title components -->
+    <div class="nameWrap">
+      <h1 class="display"></h1>
+      <input class="edit" type="text" value="">
+      <button class="edit_link">edit simple name</button>
+      <div class="clear"></div>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Contents components -->
+    <div class="contentWrap">
+      <div class="display"></div>
+      <textarea class="edit"></textarea>
+      <br>
+      <button class="edit_link">edit content</button>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="links">
+    <ul>
+      <li><a href="{{page.get_url()}}">View Page</a></li>
+      <li><a href="/page/list">Page List</a></li>
+    </ul>
+  </div>
+{% endblock body %}
+

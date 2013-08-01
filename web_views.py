@@ -97,7 +97,7 @@ def article_view(url_key):
 # PAGE SYSTEM 
 # ------------
 
-@app.route('/page', methods=['GET', 'POST', 'PUT'])
+@app.route('/page/list', methods=['GET', 'POST', 'PUT'])
 def pages():
 	if request.method == 'POST' \
 	and request.form and len(request.form):
@@ -113,12 +113,12 @@ def pages():
 		database.session.add(page)
 		database.session.commit()
 
-		return redirect('/page')
+		return redirect('/page/list')
 
 	pages = database.session.query(Page).all()
-	return render_template('page_list.html', pages=pages)
+	return render_template('pages/list.html', pages=pages)
 
-@app.route('/page_new', methods=['GET', 'POST', 'PUT'])
+@app.route('/page/new', methods=['GET', 'POST', 'PUT'])
 def page_new():
 	if request.method == 'POST' \
 	and request.form and len(request.form):
@@ -134,9 +134,9 @@ def page_new():
 		database.session.add(page)
 		database.session.commit()
 
-		return redirect('/page')
+		return redirect('/page/list')
 
-	return render_template('page_new.html')
+	return render_template('pages/create.html')
 
 
 @app.route('/page/<url_key>')
@@ -150,7 +150,20 @@ def page_view(url_key):
 	except:
 		raise NotFound
 
-	return render_template('page.html', page=page)
+	return render_template('pages/view.html', page=page)
+
+@app.route('/page/edit/<url_key>')
+def page_edit(url_key):
+	page = None
+	try:
+		#pageId = url_key.split('-')[0]
+		pageId = url_key
+		page = database.session.query(Page) \
+					.filter_by(url_key=pageId).one()
+	except:
+		raise NotFound
+
+	return render_template('pages/edit.html', page=page)
 
 
 # ---------------

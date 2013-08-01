@@ -1,5 +1,5 @@
 {% extends "BASE.html" %}
-{% set pageName = 'ArticleListPage' %}
+{% set pageName = 'PageList' %}
 {% block title %}Welcome to West GA RESA{% endblock %}
 
 {% block body %}
@@ -10,12 +10,14 @@
     <tr>
       <!--<th>Id</th>-->
       <th>Simple Name</th>
+      <th>Edit</th>
       <th>Date</th>
     </tr>
     {% for p in pages %}
       <tr>
         <!--<td>{{p.id}}</td>-->
         <td><a href="{{p.get_url()}}">{{p.name}}</a></td>
+        <td><a href="{{p.get_edit_url()}}">edit</a></td>
         <td>{{p.datetime_added|datetime}}</td>
       </tr>
     {% endfor %}

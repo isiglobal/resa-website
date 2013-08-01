@@ -1,0 +1,11 @@
+{% extends "BASE.html" %}
+{% set pageName = 'PageView' %}
+{% block title %}Welcome to West GA RESA{% endblock %}
+
+{% block body %}
+  <div id="page" data-id="{{page.id}}">
+    {{page.content_html|safe}}
+  </div>
+  <button id="pageEdit" data-url="{{page.get_edit_url()}}">Edit Page</button>
+{% endblock body %}
+
